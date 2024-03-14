@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\MaterialController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KomoditasController;
 use App\Http\Controllers\Admin\PenjualanController;
+use App\Http\Controllers\Admin\ExpenditureController;
 use App\Http\Controllers\Auth\AuthenticateController;
 
 /*
@@ -31,5 +34,10 @@ Route::name('admin.')->prefix('/admin')->group(function() {
         Route::get('/cetak-struk/{id}', [PenjualanController::class, 'cetak_struk'])->name('cetak-struk');
         Route::get('/getMaterials', [PenjualanController::class, 'getMaterials'])->name('getMaterials');
         Route::resource('/penjualan', PenjualanController::class);
+        Route::get('/export', [ExportController::class, 'index'])->name('export.index');
+        Route::post('/export-data', [ExportController::class, 'export'])->name('export.store');
+
+        Route::resource('/expenditure', ExpenditureController::class);
+        Route::resource('/user', UserController::class);
     });
 });
