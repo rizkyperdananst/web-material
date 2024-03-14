@@ -155,7 +155,7 @@
             {{-- <br>Halte Rumah Makan Putri, Kec. Tj. Morawa,, 20362
             <br> --}}
         </p>
-        <p>Nama: <b>{{ $penjualan->nama_pembeli }}</b> <br>Date: <b>{{ now()->format('d-m-Y') }}</b> <br> Status: <b>LUNAS</b></p>
+        <p>Nama: <b>{{ $penjualan->nama_pembeli }}</b> <br>Date: <b>{{ now()->format('d-m-Y') }}</b> <br> Status: <b>LUNAS</b> <br>No Nota: <b>{{ $penjualan->no_nota }}</b></p>
 
         <table>
 
@@ -167,14 +167,14 @@
                     <th class="price">Harga</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="text-align: center">
                 <tr>
                     <td class="jumlah">{{ $penjualan->jumlah }}</td>
                     <td class="deksripsi">{{ $penjualan->komoditas->komoditas }}</td>
                     <td class="deksripsi">{{ $penjualan->satuan }}</td>
                     <td class="harga">@currency($penjualan->harga)</td>
                 </tr>
-                
+
                 <tr>
                     <td class="quantity2"></td>
                     <td class="description2">
@@ -186,7 +186,7 @@
                 </tr>
             </tbody>
         </table>
-        <p class="centered">Terima kasih telah berbelanja
+        <p class="centered" style="text-align: center">Terima kasih telah berbelanja
             <br>ANUGRAH ALAM PERHIASAN
         </p>
     </div>

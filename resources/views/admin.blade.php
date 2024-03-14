@@ -21,6 +21,9 @@
     <!-- Custom styles for this template-->
     <link href="{{ url('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    {{-- DataTable --}}
+    <link href="{{ url('assets/libraries/DataTables/datatables.min.css') }}" rel="stylesheet" />
+
     @stack('styles')
 
 </head>
@@ -111,6 +114,17 @@
     <script src="{{ url('assets/js/demo/chart-pie-demo.js') }}"></script>
 
     <script src="{{ url('assets/libraries/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <!-- CDN Font Awesome -->
+    <script src="https://kit.fontawesome.com/e7f5845a19.js" crossorigin="anonymous"></script>
+
+     {{-- DataTables --}}
+     <script src="{{ url('assets/libraries/DataTables/datatables.min.js') }}"></script>
+     <script>
+         $(document).ready(function() {
+             $('#dataTable').DataTable();
+         });
+     </script>
 
     @stack('scripts')
 

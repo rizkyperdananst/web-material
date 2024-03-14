@@ -21,7 +21,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered" width="100%">
+                        <table class="table table-hover table-bordered" id="dataTable" width="100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -36,7 +36,7 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                @forelse ($komoditas as $item)
+                                @foreach ($komoditas as $item)
                                     <tr>
                                         <td width="5%">{{ $no++ }}</td>
                                         <td>{{ $item->komoditas }}</td>
@@ -79,12 +79,7 @@
                                             @endforeach
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center">Tidak ada data</td>
-                                    </tr>
-                                @endforelse
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

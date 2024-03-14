@@ -1,5 +1,5 @@
 @extends('admin')
-@section('title', 'Admin | Data Penjualan')
+@section('title', 'Admin | Data Pengeluaran')
 
 @section('content')
     <div class="row mt-2 mb-2">
@@ -16,8 +16,8 @@
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-between">
-                    <h4>Data Penjualan</h4>
-                    <a href="{{ route('admin.penjualan.create') }}" class="btn btn-primary">Tambah</a>
+                    <h4>Data Pengeluaran</h4>
+                    <a href="{{ route('admin.expenditure.create') }}" class="btn btn-primary">Tambah</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -25,13 +25,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Pembeli</th>
-                                    <th>No Nota</th>
-                                    <th>Komoditas</th>
-                                    <th>Satuan</th>
-                                    <th>Jumlah</th>
-                                    <th>Harga</th>
-                                    <th>Total Harga</th>
+                                    <th>No BON</th>
+                                    <th>Uraian Harga</th>
+                                    <th>Keterangan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -39,18 +35,20 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                @foreach ($penjualan as $item)
+                                @foreach ($expenditures as $item)
                                     <tr>
                                         <td width="5%">{{ $no++ }}</td>
-                                        <td>{{ $item->nama_pembeli }}</td>
-                                        <td>{{ $item->no_nota }}</td>
-                                        <td>{{ $item->komoditas->komoditas }}</td>
-                                        <td>{{ $item->satuan }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>@currency($item->harga)</td>
-                                        <td>@currency($item->total_harga)</td>
-                                        <td width="5%">
-                                            <a href="{{ route('admin.cetak-struk', $item->id) }}" class="btn btn-info btn-sm" target="_blank">Print</a>
+                                        <td>{{ $item->no_bon }}</td>
+                                        <td>@currency($item->uraian_harga)</td>
+                                        <td>{{ $item->keterangan }}</td>
+                                        <td width="15%">
+                                            <a href="{{ route('admin.expenditure.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('admin.expenditure.destroy', $item->id) }}" method="POST"
+                                                class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin Menghapus?')">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -61,4 +59,5 @@
             </div>
         </div>
     </div>
+
 @endsection
