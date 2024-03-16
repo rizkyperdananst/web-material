@@ -9,9 +9,10 @@
                     <h4>Tambah Penjualan</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.penjualan.store') }}" method="POST">
+                    <form action="{{ route('admin.sale.store') }}" method="POST">
                         @csrf
                         <div class="row mb-3">
+                            <input type="hidden" name="no_nota" value="{{ $noNota }}" class="form-control">
                             <div class="col-md-6">
                                 <label for="nama_pembeli" class="form-label">Nama Pembeli</label>
                                 <input type="text" name="nama_pembeli" id="nama_pembeli"
@@ -23,14 +24,14 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="komoditas" class="form-label">Komoditas</label>
-                                <select name="komoditas_id" id="komoditas"
-                                    class="form-select @error('komoditas_id') is-invalid @enderror">
+                                <select name="commodity_id" id="komoditas"
+                                    class="form-select @error('community_id') is-invalid @enderror">
                                     <option selected hidden>Pilih Komoditas</option>
                                     @foreach ($komoditas as $item)
                                         <option value="{{ $item->id }}">{{ $item->komoditas }}</option>
                                     @endforeach
                                 </select>
-                                @error('komoditas_id')
+                                @error('community_id')
                                     <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -77,7 +78,7 @@
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <button class="btn btn-primary float-end ms-3">Simpan</button>
-                                <a href="{{ route('admin.penjualan.index') }}"
+                                <a href="{{ route('admin.sale.index') }}"
                                     class="btn btn-secondary float-end">Kembali</a>
                             </div>
                         </div>
@@ -100,7 +101,7 @@
                         komoditas: komoditas
                     }, function(data) {
                         $('#satuan').empty().append(
-                            '<option value="" selected hidden>Pilih Satuan</option>');
+                            '<option selected hidden>Pilih Satuan</option>');
                         $.each(data, function(index, material) {
                             $('#satuan').append('<option value="' + material.satuan + '">' +
                                 material.satuan + '</option>');

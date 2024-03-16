@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\MaterialController;
+use App\Http\Controllers\Admin\CommodityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KomoditasController;
 use App\Http\Controllers\Admin\PenjualanController;
@@ -29,11 +31,11 @@ Route::name('admin.')->prefix('/admin')->group(function() {
         Route::resource('/dashboard', DashboardController::class);
         Route::post('/logout', [AuthenticateController::class, 'logout'])->name('logout');
 
-        Route::resource('/komoditas', KomoditasController::class);
+        Route::resource('/commodity', CommodityController::class);
         Route::resource('/material', MaterialController::class);
-        Route::get('/cetak-struk/{id}', [PenjualanController::class, 'cetak_struk'])->name('cetak-struk');
-        Route::get('/getMaterials', [PenjualanController::class, 'getMaterials'])->name('getMaterials');
-        Route::resource('/penjualan', PenjualanController::class);
+        Route::get('/cetak-struk/{id}', [SaleController::class, 'cetak_struk'])->name('cetak-struk');
+        Route::get('/getMaterials', [SaleController::class, 'getMaterials'])->name('getMaterials');
+        Route::resource('/sale', SaleController::class);
         Route::get('/export', [ExportController::class, 'index'])->name('export.index');
         Route::post('/export-data', [ExportController::class, 'export'])->name('export.store');
 

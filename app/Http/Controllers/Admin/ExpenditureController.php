@@ -25,10 +25,10 @@ class ExpenditureController extends Controller
     {
         $data = Expenditure::latest('no_bon')->first();
         if (!$data) {
-            $noBon = "AAP/0001";
+            $noBon = "N0001";
         } else {
             $oldNoBon = intval(substr($data->no_bon, 4, 4));
-            $noBon = 'AAP/' . sprintf("%04s", ++$oldNoBon);
+            $noBon = 'N' . sprintf("%04s", ++$oldNoBon);
         }
 
         return view('admin.expenditure.create', compact('noBon'));

@@ -28,8 +28,8 @@
     </div>
 
     <!-- Nav Item - Material -->
-    <li class="nav-item {{ Request::is('admin/komoditas*') ? 'active' : '' }}">
-        <a class="nav-link mb-0 pb-0" href="{{ route('admin.komoditas.index') }}">
+    <li class="nav-item {{ Request::is('admin/commodity*') ? 'active' : '' }}">
+        <a class="nav-link mb-0 pb-0" href="{{ route('admin.commodity.index') }}">
             <i class="fa-solid fa-sitemap"></i>
             <span>Komoditas</span></a>
     </li>
@@ -42,8 +42,8 @@
     </li>
 
     <!-- Nav Item - Penjualan -->
-    <li class="nav-item {{ Request::is('admin/penjualan*') ? 'active' : '' }}">
-        <a class="nav-link mb-0 pb-0" href="{{ route('admin.penjualan.index') }}">
+    <li class="nav-item {{ Request::is('admin/sale*') ? 'active' : '' }}">
+        <a class="nav-link mb-0 pb-0" href="{{ route('admin.sale.index') }}">
             <i class="fa-solid fa-cart-shopping"></i>
             <span>Penjualan</span></a>
     </li>
@@ -73,10 +73,8 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Setting Screens:</h6>
-                @role('owner')
                     <a class="collapse-item" href="{{ route('admin.user.index') }}">User</a>
                     <a class="collapse-item" href="{{ route('admin.export.index') }}">Export</a>
-                @endrole
                 <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
                 <button class="collapse-item btn btn-light" style="font-size: 14px">Logout</button>
@@ -84,20 +82,6 @@
             </div>
         </div>
     </li>
-
-    <!-- Nav Item - Charts -->
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
-    </li> --}}
-
-    <!-- Nav Item - Tables -->
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

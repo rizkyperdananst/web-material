@@ -10,7 +10,7 @@ class Material extends Model
     use HasFactory;
 
     protected $fillable = [
-        'komoditas_id',
+        'commodity_id',
         'satuan',
         'stok',
         'harga',
@@ -18,6 +18,6 @@ class Material extends Model
 
     public function komoditas()
     {
-        return $this->belongsTo(Komoditas::class, 'komoditas_id');
+        return $this->belongsTo(Commodity::class, 'commodity_id');
     }
 }

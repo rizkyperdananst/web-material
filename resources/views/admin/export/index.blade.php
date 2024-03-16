@@ -1,6 +1,6 @@
 @extends('admin')
 @section('title', 'Admin | Export Data')
-    
+
 @section('content')
 <div class="row mt-2 mb-2">
     <div class="col-md-12">
@@ -17,7 +17,7 @@
                             <label for="is_export" class="form-label">Filter Data</label>
                             <select name="is_export" id="is_export" class="form-select @error('is_export') is-invalid @enderror">
                                 <option selected hidden>Pilih Filter Data</option>
-                                <option value="Penjualan">Data Penjualan</option>
+                                <option value="Penjualan & Pengeluaran">Penjualan & Pengeluaran</option>
                             </select>
                             @error('is_export')
                                 <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>

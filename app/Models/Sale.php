@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Penjualan extends Model
+class Sale extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'nama_pembeli',
         'no_nota',
-        'komoditas_id',
+        'commodity_id',
         'satuan',
         'jumlah',
         'harga',
@@ -21,6 +21,6 @@ class Penjualan extends Model
 
     public function komoditas()
     {
-        return $this->belongsTo(Komoditas::class, 'komoditas_id');
+        return $this->belongsTo(Commodity::class, 'commodity_id');
     }
 }

@@ -17,7 +17,7 @@
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-between">
                     <h4>Data User</h4>
-                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Tambah</a>
+                    {{-- <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Tambah</a> --}}
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -42,12 +42,12 @@
                                         <td width="15%">
                                             <a href="{{ route('admin.user.edit', $item->id) }}"
                                                 class="btn btn-warning btn-sm">Edit</a>
-                                            <form class="d-inline">
+                                            {{-- <form class="d-inline">
                                                 @method('delete')
                                                 @csrf
                                                 <button class="btn btn-danger btn-sm"
                                                     onclick="return confirm('Yakin Ingin Menghapus?')">Delete</button>
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach

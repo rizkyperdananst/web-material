@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
+use App\Models\Sale;
 use App\Models\Material;
+use App\Models\Commodity;
 use App\Models\Komoditas;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PDF;
 
-class PenjualanController extends Controller
+class SaleController extends Controller
 {
     public function index()
     {
-        $penjualan = Penjualan::all();
+        $penjualan = Sale::all();
 
-        return view('admin.penjualan.index', compact('penjualan'));
+        return view('admin.sale.index', compact('penjualan'));
     }
 
     public function getMaterials(Request $request)
@@ -23,16 +25,23 @@ class PenjualanController extends Controller
         $komoditas = $request->input('komoditas');
 
         // Ambil data material dari database berdasarkan komoditas
-        $materials = Material::where('komoditas_id', $komoditas)->get();
+        $materials = Material::where('commodity_id', $komoditas)->get();
 
         return response()->json($materials);
     }
 
     public function create()
     {
-        $komoditas = Komoditas::all();
+        $komoditas = Commodity::all();
+        $data = Sale::latest('no_nota')->first();
+        if (!$data) {
+            $noNota = "N0001";
+        } else {
+            $oldNoNota = intval(substr($data->no_nota, 4, 4));
+            $noNota = 'N' . sprintf("%04s", ++$oldNoNota);
+        }
 
-        return view('admin.penjualan.create', compact('komoditas'));
+        return view('admin.sale.create', compact('komoditas', 'noNota'));
     }
 
     public function store(Request $request)
@@ -41,7 +50,7 @@ class PenjualanController extends Controller
             [
                 'nama_pembeli' => 'required',
                 'no_nota' => 'nullable',
-                'komoditas_id' => 'required|integer|exists:komoditas,id|not_in:Pilih Komoditas',
+                'commodity_id' => 'required|integer|exists:commodities,id|not_in:Pilih Komoditas',
                 'satuan' => 'required|not_in:Pilih Satuan',
                 'jumlah' => 'required',
                 'harga' => 'required',
@@ -49,10 +58,10 @@ class PenjualanController extends Controller
             ],
             [
                 'nama_pembeli.required' => 'Nama pembeli harus diisi',
-                'komoditas_id.required' => 'Komoditas harus dipilih',
-                'komoditas_id.integer' => 'Komoditas tidak valid',
-                'komoditas_id.exists' => 'Komoditas tidak ditemukan',
-                'komoditas_id.not_in' => 'Komoditas harus dipilih',
+                'commodity_id.required' => 'Komoditas harus dipilih',
+                'commodity_id.integer' => 'Komoditas tidak valid',
+                'commodity_id.exists' => 'Komoditas tidak ditemukan',
+                'commodity_id.not_in' => 'Komoditas harus dipilih',
                 'satuan.required' => 'Satuan harus diisi',
                 'satuan.not_in' => 'Satuan harus dipilih',
                 'jumlah.required' => 'Jumlah harus diisi',
@@ -61,18 +70,16 @@ class PenjualanController extends Controller
             ]
         );
 
-        $validated['no_nota'] = 'INV/' . date('d-m-Y') . '/' . random_int(1000, 9999);
+        $penjualan = Sale::create($validated);
 
-        $penjualan = Penjualan::create($validated);
-
-        return redirect()->route('admin.penjualan.index')->with('success', 'Data Penjualan Berhasil Ditambahkan');
+        return redirect()->route('admin.sale.index')->with('success', 'Data Penjualan Berhasil Ditambahkan');
     }
 
     public function cetak_struk($id)
     {
-     $penjualan = Penjualan::find($id);
- 
-     $pdf = PDF::loadview('admin.penjualan.struk',compact('penjualan'));
+     $penjualan = Sale::find($id);
+
+     $pdf = PDF::loadview('admin.sale.struk',compact('penjualan'));
 
      return $pdf->stream();
     }

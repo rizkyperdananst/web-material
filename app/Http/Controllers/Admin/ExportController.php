@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
+use App\Models\Sale;
 use App\Models\Penjualan;
+use App\Models\Expenditure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PDF;
 
 class ExportController extends Controller
 {
@@ -27,29 +29,19 @@ class ExportController extends Controller
         $start_date = $validated['start_date'];
         $end_date = $validated['end_date'];
 
-        if ($request->is_export === "Penjualan") {
+        if ($request->is_export === "Penjualan & Pengeluaran") {
             if ($request->export_to === "PDF") {
-                $penjualan = Penjualan::whereBetween('created_at', [$start_date, $end_date])->get();
-                $total = Penjualan::whereBetween('created_at', [$start_date, $end_date])->sum('total_harga');
+                $penjualan = Sale::whereBetween('created_at', [$start_date, $end_date])->get();
+                $sale_total = Sale::whereBetween('created_at', [$start_date, $end_date])->sum('total_harga');
 
-                $pdf = PDF::loadview('admin.export.export-data', compact('penjualan', 'total'))->setPaper('a4', 'landscape');
+                $expenditure = Expenditure::whereBetween('created_at', [$start_date, $end_date])->get();
+                $expenditure_total = Expenditure::whereBetween('created_at', [$start_date, $end_date])->sum('uraian_harga');
+
+                $result = $sale_total - $expenditure_total;
+
+                $pdf = PDF::loadview('admin.export.export-data', compact('start_date', 'end_date', 'penjualan', 'sale_total', 'expenditure', 'expenditure_total', 'result'))->setPaper('a4', 'landscape');
                 return $pdf->stream();
-            } elseif ($request->export_to === "EXCEL") {
-                $exportFileName = 'report-customer_' . now()->format('Y-m-d_H-i-s') . '.xlsx';
-                return Excel::download(new CustomerExport($start_date, $end_date, $is_export), $exportFileName);
             }
-        } elseif ($request->is_export == "Pengeluaran") {
-            if ($request->export_to == "PDF") {
-                $transactions = Transaction::where('status_bayar', 'LUNAS')->whereBetween('tgl_order', [$start_date, $end_date])->get();
-
-                $total = Transaction::where('status_bayar', 'LUNAS')->whereBetween('tgl_order', [$start_date, $end_date])->sum('total_bayar');
-
-                $pdf = PDF::loadview('admin.transaction-history.export-excel', compact('transactions', 'total'))->setPaper('a4', 'landscape');
-                return $pdf->stream();
-            } elseif ($request->export_to == "EXCEL") {
-                $exportFileName = 'report-customer_' . now()->format('Y-m-d_H-i-s') . '.xlsx';
-                return Excel::download(new CustomerExport($start_date, $end_date, $is_export), $exportFileName);
-            }
-        } 
+        }
     }
 }

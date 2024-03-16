@@ -17,7 +17,7 @@
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-between">
                     <h4>Data Komoditas</h4>
-                    <a href="{{ route('admin.komoditas.create') }}" class="btn btn-primary">Tambah</a>
+                    <a href="{{ route('admin.commodity.create') }}" class="btn btn-primary">Tambah</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -38,8 +38,8 @@
                                         <td width="5%">{{ $no++ }}</td>
                                         <td>{{ $item->komoditas }}</td>
                                         <td width="15%">
-                                            <a href="{{ route('admin.komoditas.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('admin.komoditas.destroy', $item->id) }}" method="POST"
+                                            <a href="{{ route('admin.commodity.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('admin.commodity.destroy', $item->id) }}" method="POST"
                                                 class="d-inline">
                                                 @method('delete')
                                                 @csrf

@@ -17,7 +17,7 @@
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-between">
                     <h4>Data Penjualan</h4>
-                    <a href="{{ route('admin.penjualan.create') }}" class="btn btn-primary">Tambah</a>
+                    <a href="{{ route('admin.sale.create') }}" class="btn btn-primary">Tambah</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

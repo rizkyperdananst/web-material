@@ -9,7 +9,7 @@
                     <h4>Tambah Komoditas</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.komoditas.store') }}" method="POST">
+                    <form action="{{ route('admin.commodity.store') }}" method="POST">
                         @csrf
                         <div class="row mb-3">
                             <div class="col-md-12">
@@ -23,7 +23,7 @@
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <button class="btn btn-primary float-end ms-3">Simpan</button>
-                                <a href="{{ route('admin.komoditas.index') }}" class="btn btn-secondary float-end">Kembali</a>
+                                <a href="{{ route('admin.commodity.index') }}" class="btn btn-secondary float-end">Kembali</a>
                             </div>
                         </div>
                     </form>
