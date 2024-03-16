@@ -13,15 +13,15 @@
                         @csrf
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="komoditas_id" class="form-label">Komoditas</label>
-                                <select name="komoditas_id" id="komoditas_id"
-                                    class="form-select @error('komoditas_id') is-invalid @enderror">
+                                <label for="commodity_id" class="form-label">Komoditas</label>
+                                <select name="commodity_id" id="commodity_id"
+                                    class="form-select @error('commodity_id') is-invalid @enderror">
                                     <option selected hidden>Pilih Komoditas</option>
                                     @foreach ($komoditas as $item)
                                         <option value="{{ $item->id }}">{{ $item->komoditas }}</option>
                                     @endforeach
                                 </select>
-                                @error('komoditas_id')
+                                @error('commodity_id')
                                     <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
                                 @enderror
                             </div>

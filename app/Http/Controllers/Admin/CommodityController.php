@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Material;
-use App\Models\Komoditas;
+use App\Models\Commodity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class KomoditasController extends Controller
+class CommodityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $komoditas = Komoditas::all();
+        $komoditas = Commodity::all();
 
-        return view('admin.komoditas.index', compact('komoditas'));
+        return view('admin.commodity.index', compact('komoditas'));
     }
 
     /**
@@ -24,7 +24,7 @@ class KomoditasController extends Controller
      */
     public function create()
     {
-        return view('admin.komoditas.create');
+        return view('admin.commodity.create');
     }
 
     /**
@@ -36,9 +36,9 @@ class KomoditasController extends Controller
             'komoditas' => 'required',
         ]);
 
-        $komoditas = Komoditas::create($validated);
+        $komoditas = Commodity::create($validated);
 
-        return redirect()->route('admin.komoditas.index')->with('success', 'Data Komoditas Berhasil Ditambahkan');
+        return redirect()->route('admin.commodity.index')->with('success', 'Data Komoditas Berhasil Ditambahkan');
     }
 
     /**
@@ -54,9 +54,9 @@ class KomoditasController extends Controller
      */
     public function edit(string $id)
     {
-        $k = Komoditas::find($id);
+        $k = Commodity::find($id);
 
-        return view('admin.komoditas.edit', compact('k'));
+        return view('admin.commodity.edit', compact('k'));
     }
 
     /**
@@ -68,9 +68,9 @@ class KomoditasController extends Controller
             'komoditas' => 'required',
         ]);
 
-        $komoditas = Komoditas::find($id)->update($validated);
+        $komoditas = Commodity::find($id)->update($validated);
 
-        return redirect()->route('admin.komoditas.index')->with('success', 'Data Komoditas Berhasil Diubah');
+        return redirect()->route('admin.commodity.index')->with('success', 'Data Komoditas Berhasil Diubah');
     }
 
     /**
@@ -78,13 +78,13 @@ class KomoditasController extends Controller
      */
     public function destroy(string $id)
     {
-        $komoditas = Komoditas::find($id);
-        $material = Material::where('komoditas_id', $komoditas->id)->get();
+        $komoditas = Commodity::find($id);
+        $material = Material::where('commodity_id', $komoditas->id)->get();
         foreach($material as $item) {
             $item->delete();
         }
         $komoditas->delete();
 
-        return redirect()->route('admin.komoditas.index')->with('success', 'Data Komoditas Berhasil Dihapus');
+        return redirect()->route('admin.commodity.index')->with('success', 'Data Komoditas Berhasil Dihapus');
     }
 }

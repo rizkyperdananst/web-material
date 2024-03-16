@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Material;
+use App\Models\Commodity;
 use App\Models\Komoditas;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,7 +16,7 @@ class MaterialController extends Controller
     public function index()
     {
         // $material = Material::with('komoditas')->get();
-        $komoditas = Komoditas::with('material')->get();
+        $komoditas = Commodity::with('material')->get();
 
         return view('admin.material.index', compact('komoditas'));
     }
@@ -25,7 +26,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        $komoditas = Komoditas::all();
+        $komoditas = Commodity::all();
         $satuan = ['DT Engkel', 'DT Colt'];
 
         return view('admin.material.create', compact('komoditas', 'satuan'));
@@ -38,15 +39,15 @@ class MaterialController extends Controller
     {
         $validated = $request->validate(
             [
-                'komoditas_id' => 'required|integer|exists:komoditas,id',
+                'commodity_id' => 'required|integer|exists:commodities,id',
                 'satuan' => 'required|not_in:Pilih Satuan',
                 'stok' => 'required',
                 'harga' => 'required',
             ],
             [
-                'komoditas_id.required' => 'Komoditas harus diisi',
-                'komoditas_id.integer' => 'Komoditas tidak valid',
-                'komoditas_id.exists' => 'Komoditas tidak ada',
+                'commodity_id.required' => 'Komoditas harus diisi',
+                'commodity_id.integer' => 'Komoditas tidak valid',
+                'commodity_id.exists' => 'Komoditas tidak ada',
                 'satuan.required' => 'Satuan harus diisi',
                 'satuan.not_in' => 'Satuan tidak valid',
                 'stok.required' => 'Stok harus diisi',
@@ -76,7 +77,7 @@ class MaterialController extends Controller
     public function edit(string $id)
     {
         $m = Material::find($id);
-        $komoditas = Komoditas::all();
+        $komoditas = Commodity::all();
         $satuan = ['DT Engkel', 'DT Colt'];
 
         return view('admin.material.edit', compact('komoditas', 'm', 'satuan'));
@@ -89,15 +90,15 @@ class MaterialController extends Controller
     {
         $validated = $request->validate(
             [
-                'komoditas_id' => 'required|integer|exists:komoditas,id',
+                'commodity_id' => 'required|integer|exists:commodities,id',
                 'satuan' => 'required|not_in:Pilih Satuan',
                 'stok' => 'required',
                 'harga' => 'required',
             ],
             [
-                'komoditas_id.required' => 'Komoditas harus diisi',
-                'komoditas_id.integer' => 'Komoditas tidak valid',
-                'komoditas_id.exists' => 'Komoditas tidak ada',
+                'commodity_id.required' => 'Komoditas harus diisi',
+                'commodity_id.integer' => 'Komoditas tidak valid',
+                'commodity_id.exists' => 'Komoditas tidak ada',
                 'satuan.required' => 'Satuan harus diisi',
                 'satuan.not_in' => 'Satuan tidak valid',
                 'stok.required' => 'Stok harus diisi',

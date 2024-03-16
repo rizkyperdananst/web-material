@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('komoditas_id')->constrained('komoditas')
+            $table->string('nama_pembeli');
+            $table->string('no_nota');
+            $table->foreignId('commodity_id')->nullable()->constrained('commodities')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('satuan');
-            $table->string('stok')->nullable();
+            $table->string('jumlah');
             $table->string('harga');
+            $table->string('total_harga');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('sales');
     }
 };
