@@ -1,205 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Cetak Struk</title>
-
+    <title>Cetak Struk Perbelanjaan</title>
     <style>
-        * {
-
-            font-size: 12px;
-            font-family: 'Times New Roman';
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        td,
-        th,
-        tr,
-        table {
-
-            border-collapse: collapse;
-        }
-
-        td.description,
-        th.description {
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
-            width: 75px;
-            max-width: 75px;
-        }
-
-        td.quantity,
-        th.quantity {
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
-            width: 40px;
-            max-width: 40px;
-            word-break: break-all;
-        }
-
-        td.price,
-        th.price {
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
-            width: 100px;
-            max-width: 100px;
-            word-break: break-all;
-        }
-
-        .centered {
-            text-align: left;
-            /* align-content: center; */
-        }
-
-        .ticket {
-            width: 200px;
-            max-width: 200px;
-            margin: 0 10px;
-            /* Menengahkan elemen secara horizontal */
-            text-align: left;
-            /* Menengahkan teks di dalam elemen */
-        }
-
-        img {
-            max-width: inherit;
-            width: inherit;
-            display: block;
-            /* Menghilangkan whitespace di bawah gambar */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            max-width: 600px;
+            /* width: 100%; */
             margin: 0 auto;
-            /* Menengahkan gambar secara horizontal */
+            padding: 20px;
+            /* border: 2px solid #333;
+            border-radius: 10px; */
         }
-
-        /* custom */
-        td.deskripsi,
-        th.deskripsi {
-            /* border-top: 1px solid black; */
-            width: 75px;
-            max-width: 75px;
+        h1 {
+            text-align: center;
         }
-
-        td.jumlah,
-        th.jumlah {
-            /* border-top: 1px solid black; */
-            width: 40px;
-            max-width: 40px;
-            word-break: break-all;
+        .info {
+            margin-bottom: 20px;
         }
-
-        td.harga,
-        th.harga {
-            /* border-top: 1px solid black; */
-            width: 100px;
-            max-width: 100px;
-            word-break: break-all;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-
-
-        td.description2,
-        th.description2 {
-            border-top: 1px solid black;
-            /* border-bottom: 1px solid black; */
-            width: 75px;
-            max-width: 75px;
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }
-
-        td.quantity2,
-        th.quantity2 {
-            border-top: 1px solid black;
-            /* border-bottom: 1px solid black; */
-            width: 40px;
-            max-width: 40px;
-            word-break: break-all;
+        th {
+            background-color: #f2f2f2;
         }
-
-        td.price2,
-        th.price2 {
-            border-top: 1px solid black;
-            /* border-bottom: 1px solid black; */
-            width: 100px;
-            max-width: 100px;
-            word-break: break-all;
-        }
-
-
-
-        @media print {
-            .ticket {
-                width: 80mm;
-                /* Sesuaikan dengan lebar kertas thermal printer */
-                margin: 0;
-            }
-
-            img {
-                max-width: 100%;
-                width: 100%;
-                display: block;
-                margin: 0 auto;
-            }
-
-            table {
-                width: 100%;
-                /* Lebar tabel mengikuti lebar kertas */
-            }
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
         }
     </style>
 </head>
-
 <body>
-    <div class="ticket">
-        <img src="{{ url('assets/img/bg-login-image.jpeg') }}"
-            style="width: 50%" alt="Logo">
-        <p class="centered"><b>ANUGRAH ALAM PERHIASAN</b>
-            {{-- <br>Halte Rumah Makan Putri, Kec. Tj. Morawa,, 20362
-            <br> --}}
-        </p>
-        <p>Nama: <b>{{ $penjualan->nama_pembeli }}</b> <br>Date: <b>{{ now()->format('d-m-Y') }}</b> <br> Status: <b>LUNAS</b> <br>No Nota: <b>{{ $penjualan->no_nota }}</b></p>
-
+    <div class="container">
+        <h1>
+            <img src="{{ url('assets/img/bg-login-image.jpeg') }}" width="100px" alt="Logo">
+            <p style="text-align: center; font-weight: semibold;">PT. ANUGRAH ALAM PERHIASAN <br>Jl. Antariksa No 7 Kota Medan, 20157 <br>Telp : 061 42781260</p>
+        </h1>
+        <hr>
         <table>
-
-            <thead>
+            <tbody>
                 <tr>
-                    <th class="quantity">Qty.</th>
-                    <th class="description">Komoditas</th>
-                    <th class="description">Satuan</th>
-                    <th class="price">Harga</th>
+                    <th>Kepada</th>
+                    <td>: {{ $sale->nama_pembeli }}</td>
+                    <th>No</th>
+                    <td>: {{ $sale->no_nota }}</td>
                 </tr>
-            </thead>
-            <tbody style="text-align: center">
                 <tr>
-                    <td class="jumlah">{{ $penjualan->jumlah }}</td>
-                    <td class="deksripsi">{{ $penjualan->komoditas->komoditas }}</td>
-                    <td class="deksripsi">{{ $penjualan->satuan }}</td>
-                    <td class="harga">@currency($penjualan->harga)</td>
+                    <th>No. SPB</th>
+                    <td>: {{ $sale->no_spb }}</td>
+                    <th>Status</th>
+                    <td>: {{ $sale->status }}</td>
                 </tr>
-
                 <tr>
-                    <td class="quantity2"></td>
-                    <td class="description2">
-                        <h3>TOTAL</h3>
-                    </td>
-                    <td colspan="3" class="price2">
-                        <h3>@currency($penjualan->total_harga)</h3>
-                    </td>
+                    <th>Supir</th>
+                    <td>: {{ $sale->supir }}</td>
+                    <th>Tanggal</th>
+                    <td>: {{ \Carbon\Carbon::parse($sale->created_at)->format('d-m-Y') }}</td>
+                </tr>
+                <tr>
+                    <th>No. Plat</th>
+                    <td>: {{ $sale->no_plat }}</td>
+                    <th>Jam Masuk</th>
+                    <td>: {{ $sale->jam_masuk }}</td>
+                </tr>
+                <tr>
+                    <th>No. HP</th>
+                    <td>: {{ $sale->no_hp }}</td>
+                    <th>Jam Keluar</th>
+                    <td>: {{ $sale->jam_keluar }}</td>
                 </tr>
             </tbody>
         </table>
-        <p class="centered" style="text-align: center">Terima kasih telah berbelanja
-            <br>ANUGRAH ALAM PERHIASAN
-        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Qty</th>
+                    <th>Komoditas</th>
+                    <th>Satuan</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $sale->jumlah }}</td>
+                    <td>{{ $sale->commodities->komoditas }}</td>
+                    <td>{{ $sale->satuan }}</td>
+                    <td>@currency($sale->harga)</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3" style="text-align: center">Total</th>
+                    <th>@currency($sale->total_harga)</th>
+                </tr>
+            </tfoot>
+        </table>
+        <hr>
+        <div class="total">
+            <p style="font-weight: semibold">STRUK INI SEBAGAI BUKTI PEMBAYARAN YANG SAH MOHON DISIMPAN</p>
+        </div>
     </div>
-    {{-- <button id="btnPrint" class="hidden-print">Print</button> --}}
-    <script src="script.js">
-        const $btnPrint = document.querySelector("#btnPrint");
-        $btnPrint.addEventListener("click", () => {
-            window.print();
-        });
-    </script>
-
-
-
 </body>
-
 </html>

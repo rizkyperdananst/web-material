@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'nama_pembeli',
         'no_nota',
@@ -17,9 +17,16 @@ class Sale extends Model
         'jumlah',
         'harga',
         'total_harga',
+        'no_spb',
+        'status',
+        'supir',
+        'no_plat',
+        'jam_masuk',
+        'jam_keluar',
+        'no_hp',
     ];
 
-    public function komoditas()
+    public function commodities()
     {
         return $this->belongsTo(Commodity::class, 'commodity_id');
     }

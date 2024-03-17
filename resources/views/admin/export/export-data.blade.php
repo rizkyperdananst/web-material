@@ -24,7 +24,7 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            /* padding: 20px; */
             width: 100%;
             text-align: center;
             display: flex;
@@ -32,7 +32,7 @@
             align-items: center;
             justify-content: space-between;
             /* Memberikan ruang antara konten dan footer */
-            min-height: 100vh;
+            /* min-height: 100vh; */
             /* Menetapkan tinggi minimum container untuk mengisi layar penuh */
         }
 
@@ -110,16 +110,24 @@
             <p style="color: black"># Laporan Penjualan dari tanggal
                 <span>{{ \Carbon\Carbon::parse($start_date)->format('d M Y') }}</span> sampai
                 <span>{{ \Carbon\Carbon::parse($end_date)->format('d M Y') }}</span></p>
-            <table width="100%" style="margin-bottom;">
-                <thead style="background-color: green">
+            <table width="100%" style="margin-bottom; font-size: 10px;">
+                <thead style="background-color: green;">
                     <tr>
                         <th>No</th>
-                        <th>Nama Pembeli</th>
+                        <th>Kepada</th>
                         <th>No Nota</th>
                         <th>Komoditas</th>
                         <th>Satuan</th>
                         <th>Jumlah</th>
                         <th>Tgl Order</th>
+                        <th>No. SPB</th>
+                        <th>Status</th>
+                        <th>Supir</th>
+                        <th>No. Plat</th>
+                        <th>No. HP</th>
+                        <th>Jam Masuk</th>
+                        <th>Jam Keluar</th>
+                        <th>Tanggal</th>
                         <th>Harga</th>
                         <th>Total Harga</th>
                     </tr>
@@ -133,9 +141,17 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $p->nama_pembeli }}</td>
                             <td>{{ $p->no_nota }}</td>
-                            <td>{{ $p->komoditas->komoditas }}</td>
+                            <td>{{ $p->commodities->komoditas }}</td>
                             <td>{{ $p->satuan }}</td>
                             <td>{{ $p->jumlah }}</td>
+                            <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d M Y') }}</td>
+                            <td>{{ $p->no_spb }}</td>
+                            <td>{{ $p->status }}</td>
+                            <td>{{ $p->supir }}</td>
+                            <td>{{ $p->no_plat }}</td>
+                            <td>{{ $p->no_hp }}</td>
+                            <td>{{ $p->jam_masuk }}</td>
+                            <td>{{ $p->jam_keluar }}</td>
                             <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d M Y') }}</td>
                             <td>@currency($p->harga)</td>
                             <td>@currency($p->total_harga)</td>
@@ -148,7 +164,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="8" style="text-align: right">Total Keseluruhan</td>
+                        <td colspan="16" style="text-align: right"><b>Total Keseluruhan</b></td>
                         <td><b>@currency($sale_total)</b></td>
                     </tr>
                 </tfoot>

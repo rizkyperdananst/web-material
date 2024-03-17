@@ -25,11 +25,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Pembeli</th>
-                                    <th>No Nota</th>
+                                    <th>Kepada</th>
                                     <th>Komoditas</th>
                                     <th>Satuan</th>
-                                    <th>Jumlah</th>
+                                    <th>Qty</th>
                                     <th>Harga</th>
                                     <th>Total Harga</th>
                                     <th>Aksi</th>
@@ -43,14 +42,15 @@
                                     <tr>
                                         <td width="5%">{{ $no++ }}</td>
                                         <td>{{ $item->nama_pembeli }}</td>
-                                        <td>{{ $item->no_nota }}</td>
-                                        <td>{{ $item->komoditas->komoditas }}</td>
+                                        <td>{{ $item->commodities->komoditas }}</td>
                                         <td>{{ $item->satuan }}</td>
                                         <td>{{ $item->jumlah }}</td>
                                         <td>@currency($item->harga)</td>
                                         <td>@currency($item->total_harga)</td>
-                                        <td width="5%">
-                                            <a href="{{ route('admin.cetak-struk', $item->id) }}" class="btn btn-info btn-sm" target="_blank">Print</a>
+                                        <td width="18%">
+                                            <a href="{{ route('admin.sale.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="{{ route('admin.sale.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                            <a href="{{ route('admin.cetak-struk', $item->id) }}" class="btn btn-success btn-sm" target="_blank">Print</a>
                                         </td>
                                     </tr>
                                 @endforeach
