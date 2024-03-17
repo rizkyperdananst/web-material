@@ -14,7 +14,6 @@
                         @method('put')
                         <div class="row mb-3">
                             <input type="hidden" name="no_nota" value="{{ $sale->no_nota }}" class="form-control">
-                            <input type="hidden" name="no_spb" value="{{ $sale->no_spb }}" class="form-control">
                             <div class="col-md-6">
                                 <label for="nama_pembeli" class="form-label">Nama Pembeli</label>
                                 <input type="text" name="nama_pembeli" value="{{ $sale->nama_pembeli }}"
@@ -47,7 +46,7 @@
                                 <label for="satuan" class="form-label">Satuan</label>
                                 <select name="satuan" id="satuan"
                                     class="form-select @error('satuan') is-invalid @enderror">
-                                    <option selected hidden>Pilih Satuan</option>
+                                    <option value="{{ $sale->satuan }}">{{ $sale->satuan }}</option>
                                 </select>
                                 @error('satuan')
                                     <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
@@ -56,7 +55,8 @@
                             <div class="col-md-6">
                                 <label for="jumlah" class="form-label">Jumlah</label>
                                 <input type="number" name="jumlah" value="{{ $sale->jumlah }}" id="jumlah"
-                                    class="form-control @error('jumlah') is-invalid @enderror" placeholder="Masukkan jumlah" oninput="hitungTotalHarga()">
+                                    class="form-control @error('jumlah') is-invalid @enderror" placeholder="Masukkan jumlah"
+                                    oninput="hitungTotalHarga()">
                                 @error('jumlah')
                                     <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
                                 @enderror
@@ -66,7 +66,8 @@
                             <div class="col-md-6">
                                 <label for="harga" class="form-label">Harga</label>
                                 <input type="text" name="harga" value="{{ $sale->harga }}" id="harga"
-                                    class="form-control @error('harga') is-invalid @enderror" readonly oninput="hitungTotalHarga()">
+                                    class="form-control @error('harga') is-invalid @enderror" readonly
+                                    oninput="hitungTotalHarga()">
                                 @error('harga')
                                     <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
                                 @enderror
@@ -104,6 +105,17 @@
                                     class="form-control @error('supir') is-invalid @enderror"
                                     placeholder="Masukkan nama supir">
                                 @error('supir')
+                                    <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="no_spb" class="form-label">No. SPB</label>
+                                <input type="text" name="no_spb" value="{{ $sale->no_spb }}" id="no_spb"
+                                    class="form-control @error('no_spb') is-invalid @enderror"
+                                    placeholder="Masukkan nama no spb">
+                                @error('no_spb')
                                     <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
                                 @enderror
                             </div>

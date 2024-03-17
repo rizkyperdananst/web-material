@@ -10,15 +10,19 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            /* background-color: red; */
+            box-sizing: border-box;
+            overflow: hidden;
+            font-weight: bold;
         }
         .container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            max-width: 600px;
+            /* max-width: 600px; */
             /* width: 100%; */
-            margin: 0 auto;
+            margin: 0 0;
             padding: 20px;
             /* border: 2px solid #333;
             border-radius: 10px; */
@@ -44,16 +48,20 @@
         }
         .total {
             margin-top: 20px;
-            text-align: right;
+            text-align: center;
             font-weight: bold;
+        }
+
+        img {
+            background-color: black;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>
-            <img src="{{ url('assets/img/bg-login-image.jpeg') }}" width="100px" alt="Logo">
-            <p style="text-align: center; font-weight: semibold;">PT. ANUGRAH ALAM PERHIASAN <br>Jl. Antariksa No 7 Kota Medan, 20157 <br>Telp : 061 42781260</p>
+            <img src="{{ url('assets/img/logo_aap_black.jpeg') }}" width="250px" alt="Logo">
+            <p style="text-align: center; font-weight: bold;">PT. ANUGERAH ALAM PERHIASAN <br>Jl. Antariksa No 7 Kota Medan, 20157 <br>Telp : 061 42781260</p>
         </h1>
         <hr>
         <table>

@@ -41,21 +41,7 @@ class SaleController extends Controller
             $noNota = 'N' . sprintf("%04s", ++$oldNoNota);
         }
 
-        $tanggal = date('d');
-
-        $lastSPB = Sale::orderBy('id', 'desc')->first();
-
-        if ($lastSPB) {
-            $lastNo = $lastSPB->no_spb;
-            $lastNo = intval(substr($lastNo, -4));
-            $nextNo = $lastNo + 1;
-        } else {
-            $nextNo = 1;
-        }
-
-        $noSPB = 'SPB/' . $tanggal . '/' . sprintf("%04d", $nextNo);
-
-        return view('admin.sale.create', compact('komoditas', 'noNota', 'noSPB'));
+        return view('admin.sale.create', compact('komoditas', 'noNota'));
     }
 
     public function store(Request $request)
@@ -69,13 +55,13 @@ class SaleController extends Controller
                 'jumlah' => 'required',
                 'harga' => 'required',
                 'total_harga' => 'required',
-                'no_spb' => 'nullable',
+                'no_spb' => 'required',
                 'status' => 'required|not_in:Pilih Status',
-                'supir' => 'nullable',
-                'no_plat' => 'nullable',
-                'jam_masuk' => 'nullable',
-                'jam_keluar' => 'nullable',
-                'no_hp' => 'nullable',
+                'supir' => 'required',
+                'no_plat' => 'required',
+                'jam_masuk' => 'required',
+                'jam_keluar' => 'required',
+                'no_hp' => 'required',
             ],
             [
                 'nama_pembeli.required' => 'Nama pembeli harus diisi',
@@ -88,8 +74,14 @@ class SaleController extends Controller
                 'jumlah.required' => 'Jumlah harus diisi',
                 'harga.required' => 'Harga harus diisi',
                 'total_harga.required' => 'Total harga harus diisi',
+                'no_spb.required' => 'No. SPB harus diisi',
                 'status.required' => 'Status harus dipilih',
                 'status.not_in' => 'Status harus dipilih',
+                'supir.required' => 'Supir harus diisi',
+                'no_plat.required' => 'No. Plat harus diisi',
+                'jam_masuk.required' => 'Jam masuk harus diisi',
+                'jam_keluar.required' => 'Jam keluar harus diisi',
+                'no_hp.required' => 'No. HP harus diisi',
             ]
         );
 
@@ -111,7 +103,7 @@ class SaleController extends Controller
         $komoditas = Commodity::all();
         $sales = Sale::all();
         $status = ['Lunas', 'Kredit'];
-        
+
         return view('admin.sale.edit', compact('sale', 'komoditas', 'sales', 'status'));
     }
 
@@ -126,13 +118,13 @@ class SaleController extends Controller
                 'jumlah' => 'required',
                 'harga' => 'required',
                 'total_harga' => 'required',
-                'no_spb' => 'nullable',
+                'no_spb' => 'required',
                 'status' => 'required|not_in:Pilih Status',
-                'supir' => 'nullable',
-                'no_plat' => 'nullable',
-                'jam_masuk' => 'nullable',
-                'jam_keluar' => 'nullable',
-                'no_hp' => 'nullable',
+                'supir' => 'required',
+                'no_plat' => 'required',
+                'jam_masuk' => 'required',
+                'jam_keluar' => 'required',
+                'no_hp' => 'required',
             ],
             [
                 'nama_pembeli.required' => 'Nama pembeli harus diisi',
@@ -145,8 +137,14 @@ class SaleController extends Controller
                 'jumlah.required' => 'Jumlah harus diisi',
                 'harga.required' => 'Harga harus diisi',
                 'total_harga.required' => 'Total harga harus diisi',
+                'no_spb.required' => 'No. SPB harus diisi',
                 'status.required' => 'Status harus dipilih',
                 'status.not_in' => 'Status harus dipilih',
+                'supir.required' => 'Supir harus diisi',
+                'no_plat.required' => 'No. Plat harus diisi',
+                'jam_masuk.required' => 'Jam masuk harus diisi',
+                'jam_keluar.required' => 'Jam keluar harus diisi',
+                'no_hp.required' => 'No. HP harus diisi',
             ]
         );
 
@@ -160,6 +158,7 @@ class SaleController extends Controller
         $sale = Sale::find($id);
 
         $pdf = PDF::loadview('admin.sale.struk', compact('sale'))->setPaper('f4', 'potrrait');
+        // $pdf = PDF::loadview('admin.sale.struk', compact('sale'))->setPaper(array(0, 0, 8, 12), 'potrrait');
 
         return $pdf->stream();
     }
