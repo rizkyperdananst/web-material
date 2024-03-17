@@ -13,7 +13,6 @@
                         @csrf
                         <div class="row mb-3">
                             <input type="hidden" name="no_nota" value="{{ $noNota }}" class="form-control">
-                            <input type="hidden" name="no_spb" value="{{ $noSPB }}" class="form-control">
                             <div class="col-md-6">
                                 <label for="nama_pembeli" class="form-label">Nama Pembeli</label>
                                 <input type="text" name="nama_pembeli" value="{{ old('nama_pembeli') }}" id="nama_pembeli"
@@ -93,6 +92,16 @@
                                 <input type="text" name="supir" value="{{ old('supir') }}" id="supir"
                                     class="form-control @error('supir') is-invalid @enderror" placeholder="Masukkan nama supir">
                                 @error('supir')
+                                    <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="no_spb" class="form-label">No. SPB</label>
+                                <input type="text" name="no_spb" value="{{ old('no_spb') }}" id="no_spb"
+                                    class="form-control @error('no_spb') is-invalid @enderror" placeholder="Masukkan nama no spb">
+                                @error('no_spb')
                                     <div class="alert alert-danger mt-2 mb-2 p-2">{{ $message }}</div>
                                 @enderror
                             </div>
