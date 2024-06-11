@@ -21,7 +21,6 @@
             justify-content: center;
             align-items: center;
             /* height: 100vh; */
-            height: 200px;
             /* max-width: 600px; */
             /* width: 100%; */
             margin: 0 0;
