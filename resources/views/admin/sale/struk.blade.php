@@ -59,7 +59,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="background-color: red">
         <h1>
             <img src="{{ url('assets/img/logo_aap_black.jpeg') }}" width="250px" alt="Logo">
             <p style="text-align: center; font-weight: bold;">PT. ANUGERAH ALAM PERHIASAN <br>Jl. Antariksa No 7 Kota Medan, 20157 <br>Telp : 061 42781260</p>
