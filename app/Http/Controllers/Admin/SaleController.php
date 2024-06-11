@@ -157,8 +157,8 @@ class SaleController extends Controller
     {
         $sale = Sale::find($id);
 
-        $pdf = PDF::loadview('admin.sale.struk', compact('sale'))->setPaper('f4', 'potrrait');
-        // $pdf = PDF::loadview('admin.sale.struk', compact('sale'))->setPaper(array(0, 0, 8, 12), 'potrrait');
+        // $pdf = PDF::loadview('admin.sale.struk', compact('sale'))->setPaper('f4', 'potrrait');
+        $pdf = PDF::loadview('admin.sale.struk', compact('sale'))->setPaper(array(0, 0, 8, 12), 'potrrait');
 
         return $pdf->stream();
     }
