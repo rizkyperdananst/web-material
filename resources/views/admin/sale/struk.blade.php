@@ -58,7 +58,7 @@
             background-color: black;
         }
 
-        /* software nya pakai pos */
+        /* software nya pakai pos atau ULT-90ATii */
     </style>
 </head>
 <body>
