@@ -38,7 +38,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            font-size: 25px;
+            font-size: 30px;
         }
         th, td {
             padding: 8px;
