@@ -57,6 +57,8 @@
         img {
             background-color: black;
         }
+
+        /* software nya pakai pos */
     </style>
 </head>
 <body>
