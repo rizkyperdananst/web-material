@@ -15,6 +15,7 @@
             box-sizing: border-box;
             overflow: hidden;
             font-weight: bold;
+            height: 200px;
         }
         .container {
             display: flex;
