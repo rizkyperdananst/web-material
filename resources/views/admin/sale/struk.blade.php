@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 22px;
+            font-size: 30px;
             margin: 0;
             padding: 0;
             /* background-color: red; */
@@ -59,7 +59,7 @@
     </style>
 </head>
 <body>
-    <div class="container" style="background-color: red">
+    <div class="container">
         <h1>
             <img src="{{ url('assets/img/logo_aap_black.jpeg') }}" width="250px" alt="Logo">
             <p style="text-align: center; font-weight: bold;">PT. ANUGERAH ALAM PERHIASAN <br>Jl. Antariksa No 7 Kota Medan, 20157 <br>Telp : 061 42781260</p>
